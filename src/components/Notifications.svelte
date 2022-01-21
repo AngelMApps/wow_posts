@@ -12,7 +12,7 @@
 <style>
 	#snackbar {
 		min-width: 250px;
-		margin-left: -125px;
+		margin-right: 10px;
 		background-color: rgb(0, 0, 0);
 		color: rgb(255, 255, 255);
 		text-align: center;
@@ -20,7 +20,7 @@
 		padding: 16px;
 		position: fixed;
 		z-index: 1;
-		left: 50%;
+		right: 0%;
 		bottom: 80px;
 	}
 	.animation-in {

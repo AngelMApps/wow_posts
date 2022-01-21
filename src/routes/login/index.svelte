@@ -3,6 +3,7 @@
 	import { signInWithEmailAndPassword } from 'firebase/auth';
 	import { goto } from '$app/navigation';
 	import Notificacion from '../../components/Notifications.svelte';
+	import Logo from '../../components/Logo.svelte';
 	let credentials = {
 		email: '',
 		password: ''
@@ -12,7 +13,6 @@
 			...credentials,
 			[e.target.name]: e.target.value
 		};
-		console.log(credentials);
 	};
 	let messageNotification = '';
 	let showNotification = false;
@@ -46,6 +46,7 @@
 	<Notificacion message={messageNotification} show={showNotification} />
 	<div class="form-div">
 		<h1>WPosts</h1>
+		<div class="avatar"><Logo /></div>
 		<input
 			class="inputs"
 			on:input={(e) => changeUser(e)}
@@ -77,29 +78,45 @@
 	/* your styles go here */
 	.container {
 		height: 100vh;
-		background-color: #000;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
+		background: rgb(0, 107, 61);
+		background: linear-gradient(
+			90deg,
+			rgba(0, 107, 61, 1) 0%,
+			rgba(53, 182, 165, 1) 48%,
+			rgba(0, 92, 105, 1) 100%
+		);
 	}
 	h1 {
-		text-align: center;
 		color: #fff;
-		font-size: 90pt;
-		margin: 10px 0px;
+		font-size: 30pt;
+		margin: 0px 0px 25px 0px;
+		text-align: center;
 	}
 	.form-div {
+		width: 320px;
+		height: 420px;
+		background: rgb(28, 82, 50);
+		color: #fff;
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		border-radius: 5px;
+		transform: translate(-50%, -50%);
+		box-sizing: border-box;
+		box-shadow: 0px 4px 50px 10px #000;
+		padding: 70px 30px;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		background-color: rgba(58, 114, 91, 0.959);
-		box-shadow: 0px 0px 16px 20px rgba(0, 0, 0, 0.2);
-		width: 50%;
-		border-radius: 5px;
-		padding: 20px;
+	}
+	.form-div .avatar {
+		width: 4rem;
+		height: 4rem;
+		border-radius: 50%;
+		box-shadow: 1px 1px 20px 3px #000;
+		position: absolute;
+		top: -30px;
+		left: calc(57% - 50px);
 	}
 	.inputs {
 		border: 1px solid #fff;
@@ -117,9 +134,9 @@
 		color: #fff;
 	}
 	.button-submit {
-		width: 17.4rem;
+		width: 100%;
 		border: 1px solid transparent;
-		background-color: rgba(107, 168, 115, 0.959);
+		background-color: rgba(25, 185, 76, 0.959);
 		border-radius: 2px;
 		height: 2.5rem;
 		margin: 5px 0px;
@@ -136,5 +153,10 @@
 		background-color: transparent;
 		color: #fff;
 		transition: border 1s, background-color 1s, color 1s;
+	}
+	a {
+		text-decoration: none;
+		font-style: oblique;
+		color: rgb(144, 255, 134);
 	}
 </style>
