@@ -1,2 +1,18 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Navbar from '../components/Navbar.svelte';
+	let user = null;
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+import CompAuth from '../components/compAuth.svelte';
+	
+</script>
+
+<main>
+	<CompAuth/>
+</main>
+
+<style>
+	main {
+		height: 100%;
+	}
+</style>
