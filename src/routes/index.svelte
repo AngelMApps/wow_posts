@@ -1,15 +1,24 @@
 <script>
-	import Navbar from '../components/Navbar.svelte';
-	let user = null;
-	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-import CompAuth from '../components/compAuth.svelte';
-	
+	import { user } from '../store/User';
+	onMount(async () => {
+		try {
+			await user.current();
+			console.log($user);
+		} catch (error) {
+			goto('/login', { replaceState: true });
+		}
+	});
 </script>
 
-<main>
-	<CompAuth/>
-</main>
+{#if $user === false}
+	<p>CARGHANGO...</p>
+{:else}
+	<main>
+		<h1>Main</h1>
+		<p>{$user.email}</p>
+	</main>
+{/if}
 
 <style>
 	main {

@@ -1,9 +1,9 @@
 <script>
 	import { auth } from '../../firebase';
-	import { signInWithEmailAndPassword } from 'firebase/auth';
 	import { goto } from '$app/navigation';
 	import Notificacion from '../../components/Notifications.svelte';
 	import Logo from '../../components/Logo.svelte';
+	import { user } from '../../store/User';
 	let credentials = {
 		email: '',
 		password: ''
@@ -24,10 +24,12 @@
 		}, 2800);
 	};
 	const loginUser = async () => {
+		let email = credentials.email;
+		let password = credentials.password;
 		try {
-			await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
-			console.log('usuario creado');
-			goto('/profile', { replaceState: true });
+			await auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+			user.setUser({ email, password });
+			goto('/', { replaceState: true });
 		} catch (error) {
 			if (error.message == 'FirebaseError: Firebase: Error (auth/wrong-password).') {
 				showMessage('contraseña incorrecta');
