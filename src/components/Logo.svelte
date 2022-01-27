@@ -9,7 +9,7 @@
 <style>
     /* your styles go here */
     div{
-        background-color: rgba(25, 185, 76, 0.959);
+        background-color: rgba(46, 97, 67, 0.959);
         width: 4rem;
         height: 4rem;
         border-radius: 35px;

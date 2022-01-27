@@ -1,7 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { auth } from '../../firebase';
-	import { createUserWithEmailAndPassword } from 'firebase/auth';
 	import Notificacion from '../../components/Notifications.svelte';
 	import Logo from '../../components/Logo.svelte';
 	let credentials = {
@@ -25,25 +24,27 @@
 	};
 	const registerUser = async () => {
 		try {
-			await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
+			await auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
 			goto('/login', { replaceState: true });
 		} catch (error) {
-			if(error.message=="Firebase: Password should be at least 6 characters (auth/weak-password)."){
-				showMessage("La contraseña debe tener al menos 6 caracteres");
+			if (
+				error.message == 'The password must be 6 characters long or more.'
+			) {
+				showMessage('La contraseña debe tener al menos 6 caracteres');
 			}
-			if(error.message=="Firebase: Error (auth/email-already-in-use)."){
-				showMessage("correo electrónico ya existe");
+			if (error.message == 'The email address is already in use by another account.') {
+				showMessage('correo electrónico ya existe');
 			}
-			if(error.message=="Firebase: Error (auth/invalid-email)."){
-				showMessage("correo electrónico invalido");
+			if (error.message == 'The email address is badly formatted.') {
+				showMessage('correo electrónico invalido');
 			}
-			console.error(error.message);
+
 		}
 	};
 </script>
 
 <div class="container">
-	<Notificacion message={messageNotification} show={showNotification}/>
+	<Notificacion message={messageNotification} show={showNotification} />
 	<div class="form-div">
 		<h1>WPosts</h1>
 		<div class="avatar"><Logo /></div>
@@ -148,5 +149,13 @@
 		background-color: transparent;
 		color: #fff;
 		transition: border 1s, background-color 1s, color 1s;
+	}
+	@media only screen and (max-width: 354px) {
+		.form-div {
+			width: 100%;
+		}
+		.inputs {
+			width: 100%;
+		}
 	}
 </style>

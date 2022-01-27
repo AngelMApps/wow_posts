@@ -8,6 +8,7 @@
 		email: '',
 		password: ''
 	};
+
 	const changeUser = (e) => {
 		credentials = {
 			...credentials,
@@ -31,13 +32,13 @@
 			user.setUser({ email, password });
 			goto('/', { replaceState: true });
 		} catch (error) {
-			if (error.message == 'FirebaseError: Firebase: Error (auth/wrong-password).') {
+			if (error.message == 'The password is invalid or the user does not have a password.') {
 				showMessage('contraseña incorrecta');
 			}
-			if (error.message == 'Firebase: Error (auth/user-not-found).') {
+			if (error.message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
 				showMessage('usuario no encontrado');
 			}
-			if (error.message == 'Firebase: Error (auth/invalid-email).') {
+			if (error.message == 'The email address is badly formatted.') {
 				showMessage('correo electrónico invalido');
 			}
 		}
@@ -160,5 +161,13 @@
 		text-decoration: none;
 		font-style: oblique;
 		color: rgb(144, 255, 134);
+	}
+	@media only screen and (max-width:354px){
+		.form-div{
+			width: 100%;
+		}
+		.inputs{
+			width: 100%;
+		}
 	}
 </style>
