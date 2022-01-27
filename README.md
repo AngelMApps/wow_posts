@@ -1,5 +1,5 @@
 # WPosts
-red social para crear posts y actualizar tu estado
+red social para crear posts
 ## Tecnologías
 - Svelte
 - Firebase
